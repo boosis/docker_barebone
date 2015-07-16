@@ -29,6 +29,7 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get install -qq nginx
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 
+RUN touch /var/log/php_errors.log && chmod 777 /var/log/php_errors.log
 RUN sed -i "0,/;error_log =.*/s//error_log = \/var\/log\/php_errors.log/" /etc/php5/fpm/php.ini
 RUN sed -i "0,/;error_log =.*/s//error_log = \/var\/log\/php_errors.log/" /etc/php5/cli/php.ini
 
