@@ -14,7 +14,7 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y vim curl wget build-esse
 RUN add-apt-repository -y ppa:nginx/stable
 RUN add-apt-repository -y ppa:ondrej/php5
 RUN apt-get update -y
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes php5-cli php5-fpm php5-curl php5-gd php5-mcrypt php5-intl php5-dev php-pear
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes php5-cli php5-fpm php5-curl php5-gd php5-mcrypt php5-intl php5-dev php-pear php5-mysql
 RUN no ""|pecl install mongo-alpha
 RUN echo "extension=mongo.so" > /etc/php5/mods-available/mongo.ini && cd /etc/php5/cli/conf.d && ln -s ../../mods-available/mongo.ini 20-mongo.ini && cd /etc/php5/fpm/conf.d && ln -s ../../mods-available/mongo.ini 20-mongo.ini
 RUN pecl install xdebug
