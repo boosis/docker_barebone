@@ -13,9 +13,9 @@ ADD xdebug.ini /etc/php5/mods-available/xdebug.ini
 RUN apt-get update -y && \
     apt-get install -y vim curl wget build-essential python-software-properties && \
     add-apt-repository -y ppa:nginx/stable && \
-    add-apt-repository -y ppa:ondrej/php5 && \
+    add-apt-repository -y ppa:ondrej/php5-5.6 && \
     apt-get update -y && \
-    apt-get install -y --force-yes nginx php5-cli php5-fpm php5-curl php5-gd php5-mcrypt php5-intl php5-dev php-pear php5-mysql && \
+    apt-get install -y --force-yes nginx php5-cli php5-fpm php5-curl php5-gd php5-mcrypt php5-intl php5-dev php-pear php5-mysql php5-xdebug && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     no ""|pecl install mongo-alpha && \
@@ -24,7 +24,6 @@ RUN apt-get update -y && \
     ln -s ../../mods-available/mongo.ini 20-mongo.ini && \
     cd /etc/php5/fpm/conf.d && \
     ln -s ../../mods-available/mongo.ini 20-mongo.ini && \
-    pecl install xdebug && \
     sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
     sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/cli/php.ini && \
     echo "daemon off;" >> /etc/nginx/nginx.conf && \
