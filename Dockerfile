@@ -14,7 +14,7 @@ RUN apt-get update -y && \
     add-apt-repository -y ppa:nginx/stable && \
     add-apt-repository -y ppa:ondrej/php5-5.6 && \
     apt-get update -y && \
-    apt-get install -y -o Dpkg::Options::=--force-confnew nginx php5-cli php5-fpm php5-curl php5-gd php5-mcrypt php5-intl php5-dev php-pear php5-mysql php5-xdebug && \
+    apt-get install -y -o Dpkg::Options::=--force-confnew nginx php5-cli php5-fpm php5-curl php5-gd php5-mcrypt php5-intl php5-dev php-pear php5-mysql php5-xdebug php5-sqlite && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*  
 
