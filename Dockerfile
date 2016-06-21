@@ -24,8 +24,8 @@ RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/5.6/fpm/php.ini 
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/5.6/fpm/php-fpm.conf && \
     touch /var/log/php_errors.log && \
     chmod 777 /var/log/php_errors.log && \
-    sed -i "0,/;error_log =.*/s//error_log = \/var\/log\/php_errors.log/" /etc/php/5.6/fpm/php.ini && \
-    sed -i "0,/;error_log =.*/s//error_log = \/var\/log\/php_errors.log/" /etc/php/5.6/cli/php.ini && \
+    sed -i "0,/;error_log =.*/s//error_log = \/proc\/self\/fd\/2/" /etc/php/5.6/fpm/php.ini && \
+    sed -i "0,/;error_log =.*/s//error_log = \/proc\/self\/fd\/2/" /etc/php/5.6/cli/php.ini && \
     usermod -u 1000 www-data && usermod -G staff www-data
 
 ADD xdebug.ini /etc/php/5.6/mods-available/xdebug.ini
