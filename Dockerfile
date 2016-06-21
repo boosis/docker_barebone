@@ -11,28 +11,21 @@ CMD ["/sbin/my_init"]
 
 RUN apt-get update -y && \
     apt-get install -y -o Dpkg::Options::=--force-confnew vim curl wget build-essential python-software-properties && \
-    add-apt-repository -y ppa:nginx/stable && \
-    add-apt-repository -y ppa:ondrej/php5-5.6 && \
+    LC_ALL=C.UTF-8 add-apt-repository -y ppa:nginx/stable && \
+    LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php && \
     apt-get update -y && \
-    apt-get install -y -o Dpkg::Options::=--force-confnew nginx php5-cli php5-fpm php5-curl php5-gd php5-mcrypt php5-intl php5-dev php-pear php5-mysql php5-xdebug php5-sqlite && \
+    apt-get install -y -o Dpkg::Options::=--force-confnew nginx php5.6-cli php5.6-fpm php5.6-curl php5.6-gd php5.6-mcrypt php5.6-intl php5.6-dev php-pear php5.6-mysql php5.6-xdebug php5.6-sqlite php5.6-xml php5.6-zip php5.6-mongo && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*  
 
-RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/cli/php.ini && \
+RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/5.6/fpm/php.ini && \
+    sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php/5.6/cli/php.ini && \
     echo "daemon off;" >> /etc/nginx/nginx.conf && \
-    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf && \
+    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/5.6/fpm/php-fpm.conf && \
     touch /var/log/php_errors.log && \
     chmod 777 /var/log/php_errors.log && \
-    sed -i "0,/;error_log =.*/s//error_log = \/var\/log\/php_errors.log/" /etc/php5/fpm/php.ini && \
-    sed -i "0,/;error_log =.*/s//error_log = \/var\/log\/php_errors.log/" /etc/php5/cli/php.ini && \
+    sed -i "0,/;error_log =.*/s//error_log = \/var\/log\/php_errors.log/" /etc/php/5.6/fpm/php.ini && \
+    sed -i "0,/;error_log =.*/s//error_log = \/var\/log\/php_errors.log/" /etc/php/5.6/cli/php.ini && \
     usermod -u 1000 www-data && usermod -G staff www-data
 
-ADD xdebug.ini /etc/php5/mods-available/xdebug.ini
-RUN no ""|pecl install mongo-alpha && \
-    echo "extension=mongo.so" > /etc/php5/mods-available/mongo.ini && \
-    rm -rf /etc/php5/cli/conf.d/20-mongo.ini /etc/php5/fpm/conf.d/20-mongo.ini /etc/php5/cli/conf.d/20-xdebug.ini /etc/php5/fpm/conf.d/20-xdebug.ini && \
-    ln -s /etc/php5/mods-available/mongo.ini /etc/php5/cli/conf.d/20-mongo.ini && \
-    ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/20-mongo.ini && \
-    ln -s /etc/php5/mods-available/xdebug.ini /etc/php5/cli/conf.d/20-xdebug.ini && \
-    ln -s /etc/php5/mods-available/xdebug.ini /etc/php5/fpm/conf.d/20-xdebug.ini
+ADD xdebug.ini /etc/php/5.6/mods-available/xdebug.ini
