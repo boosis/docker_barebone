@@ -14,7 +14,7 @@ RUN apt-get update -y && \
     LC_ALL=C.UTF-8 add-apt-repository -y ppa:nginx/stable && \
     LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php && \
     apt-get update -y && \
-    apt-get install -y -o Dpkg::Options::=--force-confnew nginx php5.6-cli php5.6-fpm php5.6-curl php5.6-gd php5.6-mcrypt php5.6-intl php5.6-dev php-pear php5.6-mysql php5.6-xdebug php5.6-sqlite php5.6-xml php5.6-zip php5.6-mongo php5.6-bcmath && \
+    apt-get install -y -o Dpkg::Options::=--force-confnew nginx php5.6-cli php5.6-fpm php5.6-curl php5.6-gd php5.6-mcrypt php5.6-intl php5.6-dev php-pear php5.6-mysql php5.6-xdebug php5.6-sqlite php5.6-xml php5.6-zip php5.6-mongo php5.6-bcmath php5.6-mbstring && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*  
 
